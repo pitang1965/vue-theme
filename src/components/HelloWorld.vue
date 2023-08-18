@@ -2,16 +2,27 @@
 defineProps<{
   msg: string
 }>()
+
+const toggleTheme = () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  
+  if (currentTheme === 'dark') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+};
 </script>
 
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
+    <h2>もともとダークモード対応はされているが、本アプリで切り替え可能とする。</h2>
     <h3>
-      もともとダークモード対応はされている。
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
+    <button @click="toggleTheme">テーマ切り替え</button>
   </div>
 </template>
 
