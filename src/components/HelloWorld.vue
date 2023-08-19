@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { NSelect, NSpace } from 'naive-ui'
+import { NInput, NSelect, NSpace } from 'naive-ui'
 
 defineProps<{
   msg: string
@@ -32,7 +32,7 @@ const editorColorOptions = [
   },
   {
     label: 'ブルーインク',
-    value: 'blue ink'
+    value: 'blue-ink'
   },
 ]
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -46,17 +46,28 @@ const updateDarkModePreference = (e: MediaQueryListEvent) => {
   isDark.value = e.matches;
 };
 
-const setTheme = () => {
+const setThemeColor = () => {
   if (themeColor.value === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-theme-color', 'dark');
   } else if (themeColor.value === 'light') {
-    document.documentElement.removeAttribute('data-theme');
+    document.documentElement.removeAttribute('data-theme-color');
   } else { // OSの設定と連動の場合
     if (isDark.value) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute('data-theme-color', 'dark');
     } else {
-      document.documentElement.removeAttribute('data-theme');
+      document.documentElement.removeAttribute('data-theme-color');
     }
+  }
+};
+
+const setEditorColor = () => {
+  document.documentElement.removeAttribute('data-editor-color');
+  if (editorColor.value === 'theme') {
+    document.documentElement.setAttribute('data-editor-color', 'theme');
+  } else if (editorColor.value === 'stone') {
+    document.documentElement.setAttribute('data-editor-color', 'stone');
+  } else {
+    document.documentElement.setAttribute('data-editor-color', 'blue-ink');
   }
 };
 
@@ -68,7 +79,8 @@ onUnmounted(() => {
   mediaQuery.removeEventListener('change', updateDarkModePreference);
 });
 
-watch([themeColor, isDark], setTheme);
+watch([themeColor, isDark], setThemeColor);
+watch([editorColor, themeColor, isDark], setEditorColor);
 
 </script>
 
@@ -82,6 +94,9 @@ watch([themeColor, isDark], setTheme);
       <n-select v-model:value="themeColor" :options="themeColorOptions" />
       <p>エディタカラー</p>
       <n-select v-model:value="editorColor" :options="editorColorOptions" />
+      <p>エディタ</p>
+      <n-input type="textarea" placeholder="はりぼてエディタです。"
+        :style="{ color: 'var(--editor-text-color)', backgroundColor: 'var(--editor-background-color)' }" />
     </n-space>
   </div>
 </template>
