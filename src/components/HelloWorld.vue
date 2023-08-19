@@ -40,7 +40,7 @@ const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 const themeColor = ref('os');
 const isDark = ref(mediaQuery.matches);
-const editorColor = ref('theme');
+const editorColor = ref('blue-ink');
 
 const updateDarkModePreference = (e: MediaQueryListEvent) => {
   isDark.value = e.matches;
@@ -73,6 +73,8 @@ const setEditorColor = () => {
 
 onMounted(() => {
   mediaQuery.addEventListener('change', updateDarkModePreference);
+  setThemeColor();
+  setEditorColor();
 });
 
 onUnmounted(() => {
