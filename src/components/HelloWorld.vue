@@ -97,7 +97,7 @@ watch([editorColor, themeColor, isDark], setEditorColor);
       <p>エディタカラー</p>
       <n-select v-model:value="editorColor" :options="editorColorOptions" />
       <p>エディタ</p>
-      <n-input type="textarea" placeholder="はりぼてエディタです。"
+      <n-input type="textarea" placeholder="はりぼてエディタです。なにか入力してください。"
         :style="{ color: 'var(--editor-text-color)', backgroundColor: 'var(--editor-background-color)' }" />
     </n-space>
   </div>

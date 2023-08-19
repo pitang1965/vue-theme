@@ -1,5 +1,10 @@
 # vue-theme
 
+Vue 3でCSS変数を用いたテーマ切り替えの実験です。
+
+* テーマ等の切り替えに用いるコンポーネント(Select)には、[naive-ui](https://www.naiveui.com/)を用いています。
+* 切り替えのコードはHelloWorld.vueに記述しています。
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
@@ -24,23 +29,23 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ## Project Setup
 
 ```sh
-npm install
+pnpm install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+pnpm run dev
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
-npm run build
+pnpm run build
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-npm run lint
+pnpm run lint
 ```
